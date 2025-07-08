@@ -1,6 +1,8 @@
 package quantumBookstore.models;
 
-public class PaperBook extends Book {
+import quantumBookstore.interfaces.Shippable;
+
+public class PaperBook extends Book implements Shippable {
     private int quantity;
 
     public PaperBook(String ISBN, String title, int publicationYear, double price, int quantity) {
