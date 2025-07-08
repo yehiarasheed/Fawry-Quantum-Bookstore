@@ -3,6 +3,8 @@ package quantumBookstore.inventory;
 import quantumBookstore.interfaces.Mailable;
 import quantumBookstore.interfaces.Shippable;
 import quantumBookstore.models.Book;
+import quantumBookstore.services.MailService;
+import quantumBookstore.services.ShippingService;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -46,10 +48,12 @@ public class Inventory {
             double paidAmount = 0.0;
             if(bookToBeBought instanceof Shippable){
                 Shippable shippableBookToBeBought = (Shippable) bookToBeBought;
-                if(shippableBookToBeBought.getQuantity()<=quantity){
+                if(quantity<=shippableBookToBeBought.getQuantity()){
                     shippableBookToBeBought.setQuantity(shippableBookToBeBought.getQuantity()-quantity);
                     inventory.put(ISBN, (Book) shippableBookToBeBought);
                     // Send to ShippingService
+                    ShippingService wasalha = new ShippingService();
+                    wasalha.ship(shippableBookToBeBought,quantity);
                     paidAmount = bookToBeBought.getPrice()*quantity;
                 }
                 else{
@@ -59,6 +63,8 @@ public class Inventory {
             else if(bookToBeBought instanceof Mailable){
                 Mailable emailableBookToBeBought = (Mailable) bookToBeBought;
                 //Send to MailService
+                MailService bareed = new MailService();
+                bareed.mail(emailableBookToBeBought,quantity);
                 paidAmount = bookToBeBought.getPrice()*quantity;
             }
             return paidAmount;
