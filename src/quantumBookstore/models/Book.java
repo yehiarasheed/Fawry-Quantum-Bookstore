@@ -17,6 +17,10 @@ public abstract class Book {
         return ISBN;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public int getPublicationYear() {
         return publicationYear;
     }

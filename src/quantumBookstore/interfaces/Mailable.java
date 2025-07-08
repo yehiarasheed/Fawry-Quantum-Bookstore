@@ -1,5 +1,5 @@
 package quantumBookstore.interfaces;
 
-public interface Emailable {
+public interface Mailable {
     String getFileType();
 }
