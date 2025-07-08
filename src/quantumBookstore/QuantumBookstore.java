@@ -62,11 +62,11 @@ public class QuantumBookstore {
 
         // Remove books older than 10 years
         System.out.println("Quantum bookstore: Removing outdated books (older than 10 years)...");
-        LinkedList<Book> outdatedBooks = inventory.removeOutdatedBooks(10);  // You need to have this method in your Inventory class
+        LinkedList<Book> outdatedBooks = inventory.removeOutdatedBooks(10); 
 
-        // Print remaining inventory
+        // Print Outdated Books
         System.out.println("Quantum bookstore: Outdated Books:");
-        for (Book b : outdatedBooks) { // Assuming getBooks() returns LinkedList<Book>
+        for (Book b : outdatedBooks) {
             System.out.println("ISBN: " + b.getISBN() + ", Title: " + b.getTitle() + ", Year: " + b.getPublicationYear());
         }
 
