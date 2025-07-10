@@ -25,10 +25,7 @@ public class Inventory {
 
     public boolean addBook(Book newBook) {
         inventory.put(newBook.getISBN(), newBook);
-        if(inventory.containsKey(newBook.getISBN())){
-            return true;
-        }
-        return false;
+        return inventory.containsKey(newBook.getISBN());
     }
 
     public LinkedList<Book> removeOutdatedBooks(int years){
@@ -62,7 +59,7 @@ public class Inventory {
                     // Log: Successful Purchase
                     System.out.println("Successfully Purchased Book: '" + bookToBeBought.getTitle() + "' with Paid Amount: " + paidAmount);
                     // Send to ShippingService for Shipping
-                    shippingService.ship(shippableBookToBeBought,quantity);
+                    shippingService.ship(shippableBookToBeBought,quantity, Address);
                 }
                 else{
                     // Log: Unsuccessful Purchase (Insufficient Quantity)
@@ -75,7 +72,7 @@ public class Inventory {
                 // Log: Successful Purchase
                 System.out.println("Successfully Purchased Book: '" + bookToBeBought.getTitle() + "' with Paid Amount: " + paidAmount);
                 //Send to MailService for Mailing
-                mailService.mail(mailableBookToBeBought,quantity);
+                mailService.mail(mailableBookToBeBought,quantity, email);
             }
             else if(bookToBeBought instanceof DemoBook){
                 // Log: Unsuccessful Purchase (Demo books are not for sale)
