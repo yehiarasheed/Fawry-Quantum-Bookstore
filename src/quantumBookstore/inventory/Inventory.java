@@ -3,6 +3,7 @@ package quantumBookstore.inventory;
 import quantumBookstore.interfaces.Mailable;
 import quantumBookstore.interfaces.Shippable;
 import quantumBookstore.models.Book;
+import quantumBookstore.models.DemoBook;
 import quantumBookstore.services.MailService;
 import quantumBookstore.services.ShippingService;
 
@@ -75,6 +76,10 @@ public class Inventory {
                 System.out.println("Successfully Purchased Book: '" + bookToBeBought.getTitle() + "' with Paid Amount: " + paidAmount);
                 //Send to MailService for Mailing
                 mailService.mail(mailableBookToBeBought,quantity);
+            }
+            else if(bookToBeBought instanceof DemoBook){
+                // Log: Unsuccessful Purchase (Demo books are not for sale)
+                throw new Exception("Error purchasing book with ISBN: " + ISBN + ". Demo books are for showcase only and are not for sale.");
             }
             return paidAmount;
         }

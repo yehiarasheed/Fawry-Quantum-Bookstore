@@ -46,6 +46,15 @@ public class QuantumBookstore {
 
         System.out.println("----------------------");
 
+        // Try buying a DemoBook
+        try {
+            inventory.buyBook("ISBN003", 1, "buyer@example.com", "123 Main St");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("----------------------");
+
         // Try buying a non-existing book
         try {
             inventory.buyBook("ISBN999", 1, "buyer@example.com", "123 Main St");
