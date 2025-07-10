@@ -13,11 +13,11 @@ import java.util.LinkedList;
 public class QuantumBookstore {
     public static void main(String[] args) {
         // Create services
-        ShippingService shippingService = new ShippingService();
-        MailService mailService = new MailService();
+        ShippingService wasalha = new ShippingService();
+        MailService bareed = new MailService();
 
         // Inventory
-        Inventory inventory = new Inventory();
+        Inventory inventory = new Inventory(wasalha,bareed);
 
         // Add books
         PaperBook paperBook = new PaperBook("ISBN001", "Java Fundamentals", 2005, 50.0, 10);
@@ -57,7 +57,7 @@ public class QuantumBookstore {
 
         // Try buying more than in stock
         try {
-            double paidAmount = inventory.buyBook("ISBN001", 20, "buyer@example.com", "123 Main St");
+            inventory.buyBook("ISBN001", 20, "buyer@example.com", "123 Main St");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

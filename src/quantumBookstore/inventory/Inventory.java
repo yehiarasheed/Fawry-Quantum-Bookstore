@@ -13,9 +13,13 @@ import java.util.LinkedList;
 
 public class Inventory {
     private HashMap<String,Book> inventory;
+    private ShippingService shippingService;
+    private MailService mailService;
 
-    public Inventory() {
+    public Inventory(ShippingService shippingService, MailService mailService) {
         inventory = new HashMap<>();
+        this.shippingService = shippingService;
+        this.mailService = mailService;
     }
 
     public boolean addBook(Book newBook) {
@@ -57,8 +61,7 @@ public class Inventory {
                     // Log: Successful Purchase
                     System.out.println("Successfully Purchased Book: '" + bookToBeBought.getTitle() + "' with Paid Amount: " + paidAmount);
                     // Send to ShippingService for Shipping
-                    ShippingService wasalha = new ShippingService();
-                    wasalha.ship(shippableBookToBeBought,quantity);
+                    shippingService.ship(shippableBookToBeBought,quantity);
                 }
                 else{
                     // Log: Unsuccessful Purchase (Insufficient Quantity)
@@ -71,8 +74,7 @@ public class Inventory {
                 // Log: Successful Purchase
                 System.out.println("Successfully Purchased Book: '" + bookToBeBought.getTitle() + "' with Paid Amount: " + paidAmount);
                 //Send to MailService for Mailing
-                MailService bareed = new MailService();
-                bareed.mail(mailableBookToBeBought,quantity);
+                mailService.mail(mailableBookToBeBought,quantity);
             }
             return paidAmount;
         }
