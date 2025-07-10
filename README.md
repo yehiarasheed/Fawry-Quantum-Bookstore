@@ -167,6 +167,14 @@ public class Demo {
 
 ```
 
+### Expected Output:
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/454cd316-8a9d-4717-a556-0b8629749af4" />
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/77a099c0-192d-45b7-90fd-40fdee56fb2e" />
+
+
+
 ## Extending the System
 
 To add a new product type:
