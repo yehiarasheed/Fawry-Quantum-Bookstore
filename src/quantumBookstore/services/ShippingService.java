@@ -8,6 +8,6 @@ public class ShippingService {
 
     public void ship(Shippable bookToBeShipped, int quantity){
         Book book = (Book) bookToBeShipped;
-        System.out.println("Have Successfully Shipped Book: " + book.getTitle() + " with quantity: " + quantity);
+        System.out.println("Successfully Shipped Book: '" + book.getTitle() + "' with Quantity: " + quantity + (quantity == 1?" Book":" Books"));
     }
 }

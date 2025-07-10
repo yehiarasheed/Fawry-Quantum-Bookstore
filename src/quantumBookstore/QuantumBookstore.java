@@ -30,42 +30,45 @@ public class QuantumBookstore {
 
         // Try buying a PaperBook
         try {
-            double paidAmount = inventory.buyBook("ISBN001", 2, "buyer@example.com", "123 Main St");
-            System.out.println("Successfully purchased book with Paid Amount: " + paidAmount);
+            inventory.buyBook("ISBN001", 2, "buyer@example.com", "123 Main St");
         } catch (Exception e) {
-            System.out.println("Quantum bookstore: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
+
+        System.out.println("----------------------");
 
         // Try buying an EBook
         try {
-            double paidAmount = inventory.buyBook("ISBN002", 1, "buyer@example.com", "123 Main St");
-            System.out.println("Successfully purchased book with Paid Amount: " + paidAmount);
+            inventory.buyBook("ISBN002", 1, "buyer@example.com", "123 Main St");
         } catch (Exception e) {
-            System.out.println("Quantum bookstore: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
+
+        System.out.println("----------------------");
 
         // Try buying a non-existing book
         try {
-            double paidAmount = inventory.buyBook("ISBN999", 1, "buyer@example.com", "123 Main St");
-            System.out.println("Successfully purchased book with Paid Amount: " + paidAmount);
+            inventory.buyBook("ISBN999", 1, "buyer@example.com", "123 Main St");
         } catch (Exception e) {
-            System.out.println("Quantum bookstore: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
+
+        System.out.println("----------------------");
 
         // Try buying more than in stock
         try {
             double paidAmount = inventory.buyBook("ISBN001", 20, "buyer@example.com", "123 Main St");
-            System.out.println("Successfully purchased book with Paid Amount: " + paidAmount);
         } catch (Exception e) {
-            System.out.println("Quantum bookstore: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
+        System.out.println("----------------------");
+
         // Remove books older than 10 years
-        System.out.println("Quantum bookstore: Removing outdated books (older than 10 years)...");
-        LinkedList<Book> outdatedBooks = inventory.removeOutdatedBooks(10); 
+        LinkedList<Book> outdatedBooks = inventory.removeOutdatedBooks(10);
 
         // Print Outdated Books
-        System.out.println("Quantum bookstore: Outdated Books:");
+        System.out.println("Outdated Books:");
         for (Book b : outdatedBooks) {
             System.out.println("ISBN: " + b.getISBN() + ", Title: " + b.getTitle() + ", Year: " + b.getPublicationYear());
         }

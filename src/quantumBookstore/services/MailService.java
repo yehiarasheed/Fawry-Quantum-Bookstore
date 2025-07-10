@@ -8,6 +8,6 @@ public class MailService {
 
     public void mail(Mailable bookToBeMailed, int quantity){
         Book book = (Book) bookToBeMailed;
-        System.out.println("Have Successfully Mailed Book: " + book.getTitle() + " with quantity: " + quantity);
+        System.out.println("Successfully Mailed Book: '" + book.getTitle() + "' with Quantity: " + quantity + (quantity == 1?" Book":" Books"));
     }
 }

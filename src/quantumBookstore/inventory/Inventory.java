@@ -27,6 +27,7 @@ public class Inventory {
     }
 
     public LinkedList<Book> removeOutdatedBooks(int years){
+        System.out.println("Removing outdated books (older than " + years + " years)...");
         Iterator<Book> iterator = inventory.values().iterator();
         LinkedList<Book> outdatedBooks = new LinkedList<>();
         while(iterator.hasNext()){
@@ -42,7 +43,8 @@ public class Inventory {
     public double buyBook(String ISBN, int quantity, String email, String Address) throws Exception{
         Book bookToBeBought = inventory.get(ISBN);
         if(bookToBeBought == null){
-            throw new Exception("Error purchasing book with ISBN: " + ISBN + ". It does not exist in the quantumBookstore.inventory. Please check the ISBN and try again.");
+            // Log: Unsuccessful Purchase DNE
+            throw new Exception("Error purchasing book with ISBN: " + ISBN + ". It does not exist in the Inventory. Please check the ISBN and try again.");
         }
         else{
             double paidAmount = 0.0;
@@ -51,21 +53,26 @@ public class Inventory {
                 if(quantity<=shippableBookToBeBought.getQuantity()){
                     shippableBookToBeBought.setQuantity(shippableBookToBeBought.getQuantity()-quantity);
                     inventory.put(ISBN, (Book) shippableBookToBeBought);
-                    // Send to ShippingService
+                    paidAmount = bookToBeBought.getPrice()*quantity;
+                    // Log: Successful Purchase
+                    System.out.println("Successfully Purchased Book: '" + bookToBeBought.getTitle() + "' with Paid Amount: " + paidAmount);
+                    // Send to ShippingService for Shipping
                     ShippingService wasalha = new ShippingService();
                     wasalha.ship(shippableBookToBeBought,quantity);
-                    paidAmount = bookToBeBought.getPrice()*quantity;
                 }
                 else{
+                    // Log: Unsuccessful Purchase (Insufficient Quantity)
                     throw new Exception("Error purchasing book with ISBN: " + ISBN + " due to insufficient quantity, please try again later.");
                 }
             }
             else if(bookToBeBought instanceof Mailable){
-                Mailable emailableBookToBeBought = (Mailable) bookToBeBought;
-                //Send to MailService
-                MailService bareed = new MailService();
-                bareed.mail(emailableBookToBeBought,quantity);
+                Mailable mailableBookToBeBought = (Mailable) bookToBeBought;
                 paidAmount = bookToBeBought.getPrice()*quantity;
+                // Log: Successful Purchase
+                System.out.println("Successfully Purchased Book: '" + bookToBeBought.getTitle() + "' with Paid Amount: " + paidAmount);
+                //Send to MailService for Mailing
+                MailService bareed = new MailService();
+                bareed.mail(mailableBookToBeBought,quantity);
             }
             return paidAmount;
         }
